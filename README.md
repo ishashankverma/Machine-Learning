@@ -58,7 +58,15 @@ to_poi_ratio|16.409712548035792
 total_wealth|15.369276864584535
 deferred_income|11.458476579280369
 
-I used SelectKBest for selecting the 7 best features to use in all the algorithms. 6 out of these 7 features are related to financial data and 1 feature is related to the email data. I also used min-max scaling to scale all the best features. I chose to use scaling because our email and financial data is varied. I used min-max scalers to rescale each feature to a common range. I created three new variables "to_poi_ratio", "from_poi_ratio" and "total_wealth". The feature "to_poi_ratio" that I created to depict the ratio of emails that a person sends to a POI, the feature "from_poi_ratio" depicts the ratio of emails that a person received from a POI and the feature "total_wealth" represents the sum of the 'salary', 'bonus', 'total_stock_value' & 'exercised_stock_options' features.
+I used SelectKBest for selecting the 7 best features to use in all the algorithms. 6 out of these 7 features are related to financial data and 1 feature is related to the email data. I created three new variables "to_poi_ratio", "from_poi_ratio" and "total_wealth". The feature "to_poi_ratio" that I created to depict the ratio of emails that a person sends to a POI, the feature "from_poi_ratio" depicts the ratio of emails that a person received from a POI and the feature "total_wealth" represents the sum of the 'salary', 'bonus', 'total_stock_value' & 'exercised_stock_options' features. Below is a comparison of metrics(for my final algorithm i.e. Naive Bayes) with various parameters:
+
+Metric|Default Features|Custom Features|With Scaling(k=7)|Without scaling(k=6)|Without scaling(k=7)|Without scaling(k=8)
+---|---|---|---|---|---|---
+Accuracy|0.484|0.584|0.851|0.841|0.853|0.849
+Precision|0.172|0.203|0.415|0.369|0.421|0.410
+Recall|0.754|0.695|0.345|0.26|0.352|0.368
+
+From the above table, we can see that the performance of algorithm with custom features is better than that with the default features. So, I decided to continue with the custom features. I tried performing SelectKBest with many variables, after reaching k=7, there was a drop in the performance. So, I decided to stick with k = 7. I tried to use min-max scaling post SelectKBest, but the value without scaling was better, so I decided not to use the scaler.
 
 __3. What algorithm did you end up using? What other one(s) did you try? How did model performance differ between algorithms?  [relevant rubric item: “pick an algorithm”]__
 
@@ -93,7 +101,7 @@ Accuracy|0.851|0.85
 Precision|0.414|0.466
 Recall|0.345|0.348
 
-Accuracy translates to the proximity/closeness of the measured value to the actual value. Accuracy of 0.851 means that the ratio of both the true predictions (true positives and true negatives) to the total predictions is 0.85. Precision is an algorithm's ability to classify actual true positives from the total true positives predicted. A precision of 0.466 means that out of 1000 people identified as POIs, 466 people are actually POIs. Recall measures an algorithm's ability to classify actual true positives from the actual true positives. A recall of 0.348 means that out of 1000 people who are actually POIs, 348 are classified correctly as POIs.
+Accuracy translates to the proximity/closeness of the measured value to the actual value. An accuracy of 0.851 means that out of 1000 people, our model correctly classified 851 people as POIs or Non POIs. Precision is an algorithm's ability to classify actual true positives from the total true positives predicted. A precision of 0.466 means that out of 1000 people identified as POIs, 466 people are actually POIs. Recall measures an algorithm's ability to classify actual true positives from the actual true positives. A recall of 0.348 means that out of 1000 people who are actually POIs, 348 are classified correctly as POIs.
 
 
 ## References
