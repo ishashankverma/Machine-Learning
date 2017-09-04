@@ -94,3 +94,14 @@ Precision|0.414|0.466
 Recall|0.345|0.348
 
 Accuracy translates to the proximity/closeness of the measured value to the actual value. Accuracy of 0.851 means that the ratio of both the true predictions (true positives and true negatives) to the total predictions is 0.85. Precision is an algorithm's ability to classify actual true positives from the total true positives predicted. A precision of 0.466 means that out of 1000 people identified as POIs, 466 people are actually POIs. Recall measures an algorithm's ability to classify actual true positives from the actual true positives. A recall of 0.348 means that out of 1000 people who are actually POIs, 348 are classified correctly as POIs.
+
+
+## References
+
+https://docs.python.org/2/library/pprint.html
+
+http://scikit-learn.org/stable/modules/feature_selection.html#univariate-feature-selection
+
+http://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest
+
+http://scikit-learn.org/stable/modules/tree.html#tree-classification
