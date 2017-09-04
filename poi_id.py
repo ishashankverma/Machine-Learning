@@ -10,6 +10,8 @@ from sklearn.feature_selection import SelectKBest
 from sklearn.feature_selection import f_classif
 from sklearn import preprocessing
 from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
+from sklearn.cluster import KMeans
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.cross_validation import train_test_split
 from sklearn.grid_search import GridSearchCV
@@ -174,8 +176,9 @@ data = featureFormat(my_dataset, my_features_list, sort_keys = True)
 labels, features = targetFeatureSplit(data)
 
 # Best Feature Selection using SelectKBest
+#k = 10
 k = 7
-kbest = SelectKBest(f_classif, k = 7)
+kbest = SelectKBest(f_classif, k)
 kbest.fit_transform(features, labels)
 scores = zip(my_features_list[1:],kbest.scores_)
 sorted_scores = sorted(scores, key = lambda x: x[1], reverse=True)
@@ -188,12 +191,14 @@ best_features_list = poi_label + kbest_features.keys()
 #pp.pprint(best_features_list)
 
 # Extract features and labels from dataset for the new features list
+##data = featureFormat(my_dataset, my_features_list, sort_keys = True) 
+##data = featureFormat(my_dataset, features_list, sort_keys = True)
 data = featureFormat(my_dataset, best_features_list, sort_keys = True)
 labels, features = targetFeatureSplit(data)
 
 # Min Max Scaling
-scaler = preprocessing.MinMaxScaler()
-features = scaler.fit_transform(features)
+#scaler = preprocessing.MinMaxScaler()
+#features = scaler.fit_transform(features)
 
 def eval_clf(grid_search, features, labels, parameters, iterations=100):
     accuracy, precision, recall = [], [], []
@@ -255,6 +260,18 @@ eval_clf(nb_grid_search, features, labels, nb_param)
 ##tree_grid_search = GridSearchCV(tree_clf, tree_param)
 ##print '\nDecisionTree:'
 ##eval_clf(tree_grid_search, features, labels, tree_param)
+
+##
+##tree_clf = DecisionTreeClassifier()
+##tree_param = {'criterion': ['entropy'],
+##              'min_samples_split': [2],
+##              'max_depth': [2],
+##              'min_samples_leaf': [1],
+##              'max_leaf_nodes': [None]}
+##tree_grid_search = GridSearchCV(tree_clf, tree_param)
+##print '\nDecisionTree:'
+##eval_clf(tree_grid_search, features, labels, tree_param)
+##
 
 ### Task 5: Tune your classifier to achieve better than .3 precision and recall 
 ### using our testing script. Check the tester.py script in the final project
